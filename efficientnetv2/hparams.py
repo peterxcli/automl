@@ -308,5 +308,5 @@ base_config = Config(
         log_step_count_steps=64,
         keep_checkpoint_max=5,
         keep_checkpoint_every_n_hours=5,
-        strategy='tpu',  # None, gpu, tpu
+        strategy='None',  # None, gpu, tpu
     ))

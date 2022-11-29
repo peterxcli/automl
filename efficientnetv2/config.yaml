@@ -1,0 +1,155 @@
+data:
+  augname: randaug
+  cache: true
+  cutmix_alpha: 0
+  data_dir: null
+  ds_name: imagenet
+  ibase: 128
+  mixup_alpha: 0
+  multiclass: false
+  num_classes: 1000
+  ra_num_layers: 2
+  ram: 10
+  resize: null
+  splits:
+    eval:
+      files: val*
+      num_images: 50000
+      slice: !!python/object/apply:builtins.slice
+      - 0
+      - null
+      - null
+      tfds_split: null
+    minival:
+      files: train*
+      num_images: 25021
+      slice: !!python/object/apply:builtins.slice
+      - 0
+      - 20
+      - null
+      tfds_split: null
+    train:
+      files: train*
+      num_images: 1256144
+      slice: !!python/object/apply:builtins.slice
+      - 20
+      - null
+      - null
+      tfds_split: null
+    trainval:
+      files: train*
+      num_images: 1281167
+      slice: !!python/object/apply:builtins.slice
+      - 0
+      - null
+      - null
+      tfds_split: null
+  tfds_name: null
+  tfds_split: null
+  try_gcs: false
+eval:
+  batch_size: 8
+  isize: 384
+  split: null
+model:
+  act_fn: silu
+  blocks_args:
+  - conv_type: 1
+    expand_ratio: 1
+    input_filters: 24
+    kernel_size: 3
+    num_repeat: 2
+    output_filters: 24
+    se_ratio: null
+    strides: 1
+  - conv_type: 1
+    expand_ratio: 4
+    input_filters: 24
+    kernel_size: 3
+    num_repeat: 4
+    output_filters: 48
+    se_ratio: null
+    strides: 2
+  - conv_type: 1
+    expand_ratio: 4
+    input_filters: 48
+    kernel_size: 3
+    num_repeat: 4
+    output_filters: 64
+    se_ratio: null
+    strides: 2
+  - conv_type: 0
+    expand_ratio: 4
+    input_filters: 64
+    kernel_size: 3
+    num_repeat: 6
+    output_filters: 128
+    se_ratio: 0.25
+    strides: 2
+  - conv_type: 0
+    expand_ratio: 6
+    input_filters: 128
+    kernel_size: 3
+    num_repeat: 9
+    output_filters: 160
+    se_ratio: 0.25
+    strides: 1
+  - conv_type: 0
+    expand_ratio: 6
+    input_filters: 160
+    kernel_size: 3
+    num_repeat: 15
+    output_filters: 256
+    se_ratio: 0.25
+    strides: 2
+  bn_epsilon: 0.001
+  bn_momentum: 0.9
+  bn_type: null
+  conv_dropout: null
+  data_format: channels_last
+  depth_coefficient: 1.0
+  depth_divisor: 8
+  dropout_rate: 0.2
+  feature_size: 1280
+  gn_groups: 8
+  headbias: null
+  local_pooling: false
+  min_depth: 8
+  model_name: efficientnetv2-s
+  num_classes: 1000
+  survival_prob: 0.8
+  width_coefficient: 1.0
+runtime:
+  iterations_per_loop: 1000
+  keep_checkpoint_every_n_hours: 5
+  keep_checkpoint_max: 5
+  log_step_count_steps: 64
+  mixed_precision: true
+  skip_host_call: false
+  strategy: None
+  use_async_checkpointing: false
+train:
+  batch_size: 4096
+  ema_decay: 0.9999
+  epochs: 350
+  ft_init_ckpt: null
+  ft_init_ema: true
+  gclip: 0
+  isize: 300
+  label_smoothing: 0.1
+  loss_type: null
+  lr_base: 0.016
+  lr_decay_epoch: 2.4
+  lr_decay_factor: 0.97
+  lr_min: 0
+  lr_sched: exponential
+  lr_warmup_epoch: 5
+  min_steps: 0
+  optimizer: rmsprop
+  sched: true
+  split: null
+  stages: 4
+  varsexp: null
+  weight_decay: 1.0e-05
+  weight_decay_exclude: .*(bias|gamma|beta).*
+  weight_decay_inc: 0.0
